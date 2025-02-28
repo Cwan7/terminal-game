@@ -19,6 +19,12 @@ const tools = [
 ]
 
 //---------------------------FUNCTIONS---------------------------
+let gameReset = () => {
+    myCash = 0;
+    userTools.splice(0, 1, {name: 'Teeth', price: '1', profitPerDay: '1'});
+    dayWorkedFunction();
+}
+
 let buyTool = () => {
     if (priceOfChosenTool > myCash) {
         console.log(tools);
@@ -62,6 +68,12 @@ while (!victoryAchieved) {
     if (myCash > 1000) {
         victoryAchieved = true;
         console.log(`CONGRADULATIONS!! You have earned more then $1,000`)
-        break;
+        let playAgain = prompt(`${username} did you want to play again? Yes or No`)
+            playAgain = playAgain.toUpperCase();
+            if (playAgain === 'YES') {
+                gameReset();
+            } else {
+                 break;
+            }
 } askStoreOrWork()
 }
