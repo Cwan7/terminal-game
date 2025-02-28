@@ -7,9 +7,10 @@ let chooseTool = 0
 let daysWorked = 0
 victoryAchieved = false
 userWantsToPlay = true
+let myToolsProfit = 1
 
 //----------------------ARRAYS-----------------------------
-const userTools = [{name: 'Teeth', price: '1', profitPerDay: '1'}];
+const userTools = [{name: 'Teeth', price: 1, profitPerDay: 1}];
 
 const tools = [
     {code: 1, name: "Scissors", price: 5, profitPerDay: 5},
@@ -21,9 +22,16 @@ const tools = [
 //---------------------------FUNCTIONS---------------------------
 let gameReset = () => {
     myCash = 0;
-    userTools.splice(0, 1, {name: 'Teeth', price: '1', profitPerDay: '1'});
+    userTools.push({name: 'Teeth', price: '1', profitPerDay: '1'});
     dayWorkedFunction();
 }
+let listInventory = () => {
+    let inventoryList = ''
+    for (let i = 0; i < userTools.length; i++ ) {
+        inventoryList = inventoryList + userTools[i].name + ', ';
+        console.log(inventoryList)
+    } return inventoryList
+} 
 
 let buyTool = () => {
     if (priceOfChosenTool > myCash) {
@@ -34,9 +42,11 @@ let buyTool = () => {
         return
     } else if (priceOfChosenTool <= myCash) {
         myCash = myCash - priceOfChosenTool;
-        userTools.splice(0, 1, tools[chooseTool - 1]); 
+        userTools.push(tools[chooseTool - 1]);
+        myToolsProfit = myToolsProfit + userTools[userTools.length - 1].profitPerDay
         console.log(`You have purchased ${tools[chooseTool - 1].name}, You now have $${myCash} left.`)
-        console.log(`Your updated tool: ${userTools[0].name}: Profits Per Day: $${userTools[0].profitPerDay}`)
+        let newInventoryList = listInventory();
+        console.log(`Your updated tool: ${newInventoryList}: Profits Per Day: $${myToolsProfit}`)
         return;
     }
 }
@@ -61,7 +71,7 @@ let dayWorkedFunction = () => {
 
         while (isNaN(daysWorkedPrompt) || daysWorkedPrompt < 1 || daysWorkedPrompt > 10) {
             daysWorkedPrompt = prompt(`Invalid input. Please enter a number between 1 and 10`);
-    }myCash = myCash + (daysWorkedPrompt * userTools[0].profitPerDay);
+    }myCash = myCash + (daysWorkedPrompt * myToolsProfit);
  }
 dayWorkedFunction();
 while (!victoryAchieved) {
