@@ -13,10 +13,10 @@ let myToolsProfit = 1
 const userTools = [{name: 'Teeth', price: 1, profitPerDay: 1}];
 
 const tools = [
-    {code: 1, name: "Scissors", price: 5, profitPerDay: 5},
-    {code: 2, name: "Push Mower", price: 25, profitPerDay: 50},
-    {code: 3, name: "Battery Mower", price: 250, profitPerDay: 100},
-    {code: 4, name: "Starving Students", price: 500, profitPerDay: 250},
+    {code: [1], name: "Scissors", price: 5, profitPerDay: 5},
+    {code: [2], name: "Push Mower", price: 25, profitPerDay: 50},
+    {code: [3], name: "Battery Mower", price: 250, profitPerDay: 100},
+    {code: [4], name: "Starving Students", price: 500, profitPerDay: 250},
 ]
 
 //---------------------------FUNCTIONS---------------------------
@@ -67,7 +67,7 @@ let askStoreOrWork = () => {
 }
 
 let dayWorkedFunction = () => {
-    let daysWorkedPrompt = prompt(`With ${userTools[0].name} making $${userTools[0].profitPerDay}/Day, How many days do you want to work?`);
+    let daysWorkedPrompt = prompt(`With ${userTools[0].name}, making $${userTools[0].profitPerDay}/Day, How many days do you want to work?`);
 
         while (isNaN(daysWorkedPrompt) || daysWorkedPrompt < 1 || daysWorkedPrompt > 10) {
             daysWorkedPrompt = prompt(`Invalid input. Please enter a number between 1 and 10`);
